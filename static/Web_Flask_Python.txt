@@ -221,5 +221,44 @@ otherwise keep them sign in
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 to make edit delete enable create endpoint for this
 
+-create edit html to edit blog or enter new blog details.
+-if you enter blog details then those saved in database and same will be refected on home page as well as dashboard table
+
+create file uploader
+
+create delete button to delete blogs
+
+add next & previous post button 
+<a class="btn btn-primary float-left" href="{{prev}}">&larr; Previous </a>
+<a class="btn btn-primary float-right" href="{{next}}">Next &rarr;</a>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Pagination
+-purpose if you have 100 blogs and you want to show 5 blog per page. after clicking on next button next 5 should come
+- logic first page is page1 and fetch only 5 pages per page
+- First middle last
+- if you are on page 1 then next button will open next page next
+	first page
+	 if (page == 1):
+        prev="#"
+        next = "/?page=" + str(page+1)
+
+	middle
+	prev = " /?page=" + str(page-1)
+        next = "/?page=" + str(page+1)
+
+	last
+	prev = " /?page=" + str(page-1)
+        next = "/?page=" + str(page+1)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+export database sql and save it in flask folder
+
+uploading flask blog files on github by using get bash terminal
+create new repository
+and add, commit it
+note : ensure no userid and password files be public
+
+buy only valid domain name from godaddy.com and set up DNS for bought domain.
 
 

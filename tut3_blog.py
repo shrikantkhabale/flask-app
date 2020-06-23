@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,session,redirect
+from flask import Flask, render_template, request,session,redirect,flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from werkzeug.utils import secure_filename
@@ -8,7 +8,7 @@ import math
 from datetime import datetime
 
 
-with open('config.json', 'r') as c:
+with open("config.json", 'r') as c:
     params = json.load(c)["params"]
 
 local_server = True
@@ -51,6 +51,8 @@ class Posts(db.Model):
 
 @app.route("/")
 def home():
+    flash("Code with harry","success")
+    flash("like harry video","danger")
     posts = Posts.query.filter_by().all()
     last = math.ceil(len(posts)/int(params["no_of_posts"]))
     #[0:params["no_of_posts"]]
@@ -85,6 +87,10 @@ def post_route(post_slug):
 @app.route("/about")
 def about():
     return render_template('about.html', params=params)
+
+@app.route("/Qlik")
+def qlik():
+    return render_template('qliksense.html', params=params)    
 
 @app.route("/dashboard",methods=['GET','POST'])
 def dashboard():
@@ -130,7 +136,7 @@ def edit(srno):
                 return redirect('/edit/'+srno)
 
         post= Posts.query.filter_by(srno=srno).first()
-        render_template('edit.html',params=params,post=post)
+        return render_template('edit.html', params=params, post=post, srno=srno)
 
 @app.route("/uploader", methods = ['GET', 'POST'])
 def uploader():
@@ -167,6 +173,7 @@ def contact():
                           recipients = [params['gmail-user']],
                           body = message + "\n" + phone
                           )
+    flash("thanks for submitting your details. we will get back to you", "success")
     return render_template('contact.html', params=params)
 
 
